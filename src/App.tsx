@@ -1,13 +1,10 @@
 import React from 'react';
+import { ExperienceBar } from './components/experienceBar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Hello Alvez
-        </p>
-      </header>
+    <div className="container">
+      <ExperienceBar />
     </div>
   );
 }
