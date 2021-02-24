@@ -8,7 +8,9 @@ body{
     color: var(--text);
 }
 body, input, textarea, button{
-    font: 400, 1rem, 'Inter';
+    font-weight: 400;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
 }
 button{
     cursor: pointer;
@@ -16,32 +18,6 @@ button{
 a{
     text-decoration: none;
     color: inherit;
-}
-.experience-bar{
-    display: flex;
-    align-items: center;
-}
-.experience-bar > div {
-    flex: 1; 
-    height: 4px;
-    border-radius: 4px;
-    background: var(--gray-line);
-    margin: 0 1.5rem;
-    position: relative;
-}
-.experience-bar > div > div{
-    height: 4px;
-    border-radius: 4px;
-    background-color: var(--green);
-
-}
-.experience-bar > div > span{
-    position: absolute;
-    top: 12px;
-    transform: translateX(-50%);
-}
-.experience-bar span{
-    font-size: 1rem;
 }
 .container{
     height: 100vh;
