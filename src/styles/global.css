@@ -19,6 +19,10 @@ a{
     text-decoration: none;
     color: inherit;
 }
+main{
+    display: flex;
+    flex-direction: row;
+}
 .container{
     height: 100vh;
     max-width: 992px;

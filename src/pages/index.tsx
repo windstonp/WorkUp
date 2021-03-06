@@ -8,6 +8,7 @@ import styles from '../styles/pages/Home.module.css';
 import { ChallengeBox } from "../components/challengeBox";
 import { CountdownProvider } from "../contexts/countdownContext";
 import { ChallengesProvider } from "../contexts/challengesContext";
+import { Navbar } from "../components/Navbar";
 
 interface HomeProps{
   level: number,
@@ -22,26 +23,29 @@ export default function Home(props :HomeProps) {
       currentExperience={props.currentExperience}
       challengesCompleted={props.challengesCompleted}
     >
-      <div className={styles.container}>
-        <Head>
-          <title>
-            Inicio - WorkUp
-          </title>
-        </Head>
-        <ExperienceBar />
-        <CountdownProvider>
-          <section>
-            <div>
-              <Profile />
-              <CompletedChallenges/>
-              <Countdown />
-            </div>
-            <div>
-              <ChallengeBox/>
-            </div>
-          </section>
-        </CountdownProvider>
-      </div>
+      <main>
+        <Navbar/>
+        <div className={styles.container}>
+          <Head>
+            <title>
+              Inicio - WorkUp
+            </title>
+          </Head>
+          <ExperienceBar />
+          <CountdownProvider>
+            <section>
+              <div>
+                <Profile />
+                <CompletedChallenges/>
+                <Countdown />
+              </div>
+              <div>
+                <ChallengeBox/>
+              </div>
+            </section>
+          </CountdownProvider>
+        </div>
+      </main>
     </ChallengesProvider>
   )
 }
