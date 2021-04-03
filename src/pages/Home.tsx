@@ -42,8 +42,7 @@ export default function Home(props :HomeProps) {
       level={props.level}
       currentExperience={props.currentExperience}
       challengesCompleted={props.challengesCompleted}
-      challengerName={user.name}
-      challengerPhoto={user.image}
+      challengerUserInfo={user}
     >
       <main>
         <Navbar/>

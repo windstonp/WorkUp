@@ -8,8 +8,12 @@ interface ChallengesProviderProps{
     level: number,
     currentExperience: number,
     challengesCompleted: number,
-    challengerName: string,
-    challengerPhoto: string
+    challengerUserInfo: User,
+}
+
+interface User{
+    name: string,
+    image: string
 }
 interface Challenge{
     type: 'body' | 'eye',
@@ -27,8 +31,8 @@ interface ChallengesContextData{
     experienceToNextLevel: number,
     completeChallenge: () => void,
     closeLevelUpModal: () => void,
-    challengerName: string,
-    challengerPhoto: string
+    getChallengerName: () => string,
+    getChallengerPhoto: () => string
 }
 export function ChallengesProvider( { children, ...rest } :ChallengesProviderProps ){
     const [level, setLevel] = useState(rest.level);
@@ -37,8 +41,7 @@ export function ChallengesProvider( { children, ...rest } :ChallengesProviderPro
     const [activeChallenge, setActiveChallenge] = useState(null);
     const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
     const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
-    const [challengerName, setChallengerName] = useState(rest.challengerName); 
-    const [challengerPhoto, setChallengerPhoto] = useState(rest.challengerPhoto); 
+    const [challengerUserInfo, setChallengerUserInfo] = useState(rest.challengerUserInfo); 
     useEffect(()=>{
         Notification.requestPermission();
     },[]);
@@ -83,6 +86,12 @@ export function ChallengesProvider( { children, ...rest } :ChallengesProviderPro
         setActiveChallenge(null);
         setChallengesCompleted( challengesCompleted + 1);
     }
+    function getChallengerName(){
+        return challengerUserInfo.name ?? '';
+    }
+    function getChallengerPhoto(){
+        return challengerUserInfo.image ?? '';
+    }
     return (
         <ChallengeContext.Provider 
             value=
@@ -98,8 +107,8 @@ export function ChallengesProvider( { children, ...rest } :ChallengesProviderPro
                         experienceToNextLevel,
                         completeChallenge,
                         closeLevelUpModal,
-                        challengerName,
-                        challengerPhoto
+                        getChallengerName,
+                        getChallengerPhoto
                     }
                 }
         >
