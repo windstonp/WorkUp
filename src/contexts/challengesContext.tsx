@@ -7,7 +7,9 @@ interface ChallengesProviderProps{
     children: ReactNode,
     level: number,
     currentExperience: number,
-    challengesCompleted: number
+    challengesCompleted: number,
+    challengerName: string,
+    challengerPhoto: string
 }
 interface Challenge{
     type: 'body' | 'eye',
@@ -24,7 +26,9 @@ interface ChallengesContextData{
     resetChallenge: () => void,
     experienceToNextLevel: number,
     completeChallenge: () => void,
-    closeLevelUpModal: () => void
+    closeLevelUpModal: () => void,
+    challengerName: string,
+    challengerPhoto: string
 }
 export function ChallengesProvider( { children, ...rest } :ChallengesProviderProps ){
     const [level, setLevel] = useState(rest.level);
@@ -33,6 +37,8 @@ export function ChallengesProvider( { children, ...rest } :ChallengesProviderPro
     const [activeChallenge, setActiveChallenge] = useState(null);
     const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
     const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
+    const [challengerName, setChallengerName] = useState(rest.challengerName); 
+    const [challengerPhoto, setChallengerPhoto] = useState(rest.challengerPhoto); 
     useEffect(()=>{
         Notification.requestPermission();
     },[]);
@@ -91,7 +97,9 @@ export function ChallengesProvider( { children, ...rest } :ChallengesProviderPro
                         resetChallenge,
                         experienceToNextLevel,
                         completeChallenge,
-                        closeLevelUpModal
+                        closeLevelUpModal,
+                        challengerName,
+                        challengerPhoto
                     }
                 }
         >
