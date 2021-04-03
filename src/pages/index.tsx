@@ -1,61 +1,39 @@
-import { CompletedChallenges } from "../components/completedChallenges";
-import { Countdown } from "../components/countdown";
-import { ExperienceBar } from "../components/experienceBar"
-import { Profile } from "../components/profile"
-import Head from 'next/head';
-import { GetServerSideProps } from 'next';
-import styles from '../styles/pages/Home.module.css';
-import { ChallengeBox } from "../components/challengeBox";
-import { CountdownProvider } from "../contexts/countdownContext";
-import { ChallengesProvider } from "../contexts/challengesContext";
-import { Navbar } from "../components/Navbar";
-
-interface HomeProps{
-  level: number,
-  currentExperience: number,
-  challengesCompleted: number,
-}
-
-export default function Home(props :HomeProps) {
-  return (
-    <ChallengesProvider
-      level={props.level}
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}
-    >
-      <main>
-        <Navbar/>
-        <div className={styles.container}>
-          <Head>
-            <title>
-              Inicio - WorkUp
-            </title>
-          </Head>
-          <ExperienceBar />
-          <CountdownProvider>
-            <section>
-              <div>
-                <Profile />
-                <CompletedChallenges/>
-                <Countdown />
-              </div>
-              <div>
-                <ChallengeBox/>
-              </div>
-            </section>
-          </CountdownProvider>
-        </div>
-      </main>
-    </ChallengesProvider>
+import React from 'react';
+import style from "../styles/pages/Login.module.css";
+import { useSession, signIn, signOut } from 'next-auth/client';
+import Link from 'next/link';
+export default function LoginPage(){
+  const [ session, loading ] = useSession();
+  return(
+    <div className={style.container}>
+      <div>
+        <img src="/icons/login-logo.svg" alt="logo-transparent"/>
+      </div>
+      <div>
+        <form>
+          <img src="/logo-full.svg" alt="logo full"/>
+          <h1>
+            Bem Vindo!
+          </h1>
+          <div className={style.githubMessage}>
+            <img src="/icons/github.svg" alt="github logo"/>
+            <p>
+              Faça login com seu Github para começar
+            </p>
+          </div>
+          <div>
+            {(!session) ?
+              <button className={style.loginButton} onClick={signIn}>Login</button>
+              :
+              <Link href="/Home">
+                <button className={style.loginButton}>
+                    acesse seu dashboard!
+                </button>
+              </Link>
+            }
+          </div>
+        </form>
+      </div>
+    </div>
   )
-}
-export const getServerSideProps :GetServerSideProps = async (ctx) => {
-  const {level, currentExperience, challengesCompleted} = ctx.req.cookies;
-  return{
-    props:{
-      level: Number(level ?? 1), 
-      currentExperience: Number(currentExperience ?? 0), 
-      challengesCompleted: Number(challengesCompleted ?? 0)
-    }
-  }
 }

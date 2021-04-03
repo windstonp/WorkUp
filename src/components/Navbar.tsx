@@ -6,11 +6,8 @@ export function Navbar(){
                 <img src="/icons/nav-logo.svg" alt="logo"/>
             </div>
             <div className={style.LinksContainer}>
-                <a href="/" className={style.selected}>
+                <a href="/Home" className={style.selected}>
                     <img src="/icons/house.svg" alt="Home"/>
-                </a>
-                <a href="/ranking" >
-                    <img src="/icons/ranking.svg" alt="Ranking"/>
                 </a>
             </div>
         </nav>
